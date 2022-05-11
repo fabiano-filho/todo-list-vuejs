@@ -1,5 +1,7 @@
 <template>
-    <Tasks/>
+    <div id="align">
+      <Tasks/>
+    </div>
 </template>
 
 <style>
@@ -18,6 +20,10 @@
 body {
   font-size: 1.6rem;
   font-family: "DM sans";
+}
+
+#align {
+  padding-inline: 3rem;
 }
 
 </style>
