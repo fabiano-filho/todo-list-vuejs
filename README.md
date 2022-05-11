@@ -1,2 +1,1 @@
-# todo-list-vuejs
-Todo list simples desenvolvido em Vue js
+# To do list simples feito com o framework Vuejs
