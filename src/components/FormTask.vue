@@ -1,7 +1,7 @@
 <template>
   <div class="form-task">
-      <input type="text" placeholder="Tarefa" class="text-task">
-      <button type="submit" class="button">Adicionar</button>
+      <input @keypress="keyPress($event)" v-model="task" type="text" placeholder="Digite sua tarefa" class="text-task">
+      <button  @click.prevent="addTask" class="button">Adicionar</button>
   </div>
 </template>
 
@@ -37,7 +37,22 @@ export default {
   name: "FormTask",
   data(){
       return {
+          task: ''
+      }
+  },
+  methods: {
+      addTask(){
+        if(this.task.trim() == '') {
+            return
+        }
+        this.$emit('add-task', this.task)
 
+        this.task = ''
+      },
+      keyPress(event) {
+        if(event.key == 'Enter') {
+            this.addTask()
+        }
       }
   }
 }
