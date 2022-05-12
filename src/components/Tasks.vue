@@ -54,6 +54,7 @@ h1 {
 
 <script>
 import FormTask from "@/components/FormTask.vue"
+import Cookies from 'js-cookie'
 
 export default {
     name: "Tasks",
