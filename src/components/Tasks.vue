@@ -2,7 +2,7 @@
     <div class="container">
         <h1>Tarefas</h1>
         <FormTask @add-task="addTask" />
-        <ul v-show="!!tasks" v-for="task, id in allTasks" :key="id" class="list-tasks">
+        <ul v-if="!!tasks" v-for="task, id in allTasks" :key="id" class="list-tasks">
             <li class="task-item"><span>{{ task }}</span><a ><i class="fa fa-trash" aria-hidden="true" @click="deleteTask(id)"></i></a></li>
         </ul>
     </div>
@@ -67,16 +67,26 @@ export default {
     },
     methods: {
         addTask(task) {
-            this.tasks.push(task)
+            this.tasks.unshift(task)
         },
         deleteTask(id) {
             this.tasks.splice(id, 1)
         }
     },
+    created() {
+        if(!Cookies.get('cookie_task')) {
+            Cookies.set('cookie_task', this.tasks)
+        }else{
+            this.tasks = JSON.parse(Cookies.get('cookie_task'))
+        }
+    },
+    updated() {
+        Cookies.set('cookie_task', JSON.stringify(this.tasks))
+    },
     computed: {
-      allTasks() {
-        return this.tasks.reverse()
+        allTasks() {
+            return this.tasks
+        }
     }
-  }
 }
 </script>
