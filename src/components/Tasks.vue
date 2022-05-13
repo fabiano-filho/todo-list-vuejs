@@ -54,7 +54,7 @@ h1 {
 
 <script>
 import FormTask from "@/components/FormTask.vue"
-import Cookies from 'js-cookie'
+
 
 export default {
     name: "Tasks",
@@ -75,14 +75,12 @@ export default {
         }
     },
     created() {
-        if(!Cookies.get('cookie_task')) {
-            Cookies.set('cookie_task', this.tasks)
-        }else{
-            this.tasks = JSON.parse(Cookies.get('cookie_task'))
+        if(localStorage.length > 0) {
+            this.tasks = JSON.parse(localStorage.getItem('tasks'))
         }
     },
     updated() {
-        Cookies.set('cookie_task', JSON.stringify(this.tasks))
+        localStorage.setItem('tasks', JSON.stringify(this.tasks))
     },
     computed: {
         allTasks() {
